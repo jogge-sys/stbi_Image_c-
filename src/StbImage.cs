@@ -5,6 +5,18 @@ using System.Drawing.Imaging;
 
 class StbImage {
 
+	[DllImport("libStbImageCSharp.dll", CallingConvention = CallingConvention.Cdecl)] // , CharSet = CharSet.Ansi
+	public static extern IntPtr Load ([MarshalAs(UnmanagedType.LPStr)]String Path, ref int Width, ref int Height, ref int Channels);
+
+	[DllImport("libStbImageCSharp.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void Set_Flip_Verticaly_On_Load (bool Value);
+
+	[DllImport("libStbImageCSharp.dll", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void Info ([MarshalAs(UnmanagedType.LPStr)]String Path, ref int Width, ref int Height, ref int Channels);
+
+//	[DllImport("libStbImageCSharp.so", CallingConvention = CallingConvention.Cdecl)]
+//	public static extern void Image_Free ([MarshalAs(UnmanagedType.LPArray)] byte[] Data);
+
 	public struct Image {
 		public int Width;
 		public int Height;
@@ -90,18 +102,6 @@ class StbImage {
 		}
 
 	}
-
-	[DllImport("libStbImageCSharp.so", CallingConvention = CallingConvention.Cdecl)] // , CharSet = CharSet.Ansi
-	public static extern IntPtr Load ([MarshalAs(UnmanagedType.LPStr)]String Path, ref int Width, ref int Height, ref int Channels);
-
-	[DllImport("libStbImageCSharp.so", CallingConvention = CallingConvention.Cdecl)]
-	public static extern void Set_Flip_Verticaly_On_Load (bool Value);
-
-	[DllImport("libStbImageCSharp.so", CallingConvention = CallingConvention.Cdecl)]
-	public static extern void Info ([MarshalAs(UnmanagedType.LPStr)]String Path, ref int Width, ref int Height, ref int Channels);
-
-//	[DllImport("libStbImageCSharp.so", CallingConvention = CallingConvention.Cdecl)]
-//	public static extern void Image_Free ([MarshalAs(UnmanagedType.LPArray)] byte[] Data);
 
 	public static Bitmap CreateBitmapFromBytes (byte[] pixelValues, int width, int height) {
 		// Create Image
